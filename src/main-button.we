@@ -1,0 +1,47 @@
+<template>
+    <div class="btn" style="background-color: {{backGroundColor}};margin: {{margin}};border-radius: {{borderRadius}}">
+        <text class="btn-txt">{{value}}</text>
+    </div>
+</template>
+
+<script>
+    require('weex-components');
+    var colors = require("../common/colors")
+    module.exports = {
+        data: {
+            type: '',
+            value: '',
+            borderRadius:0,
+            margin:0,
+            backGroundColor:colors.mainColor
+        },
+        methods: {}
+    }
+</script>
+
+<style>
+    .btn {
+        margin-bottom: 0;
+        align-items: center;
+        justify-content: center;
+        border-width: 0px;
+        border-style: solid;
+        border-color: #333;
+
+        /*white-space: nowrap;*/
+        /*vertical-align: middle;*/
+        /*touch-action: manipulation;*/
+        /*cursor: pointer;*/
+        /*-webkit-user-select: none;*/
+        /*background-image: none;*/
+        /*border-image-source: initial;*/
+        /*border-image-slice: initial;*/
+        /*border-image-width: initial;*/
+        /*border-image-outset: initial;*/
+        /*border-image-repeat: initial;*/
+    }
+    .btn-txt{
+        font-size:30px;
+        color:white;
+    }
+</style>

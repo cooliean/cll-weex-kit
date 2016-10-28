@@ -1,0 +1,22 @@
+{
+  "name": "cll-weex-kit",
+  "version": "0.1.0",
+  "main": "./index.js",
+  "description": "A group of simple and useful weex components",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cooliean"
+  },
+  "bugs": {
+    "url": "https://github.com/cooliean/"
+  },
+  "keywords": [
+    "weex",
+    "webcomponents",
+    "javascript",
+    "html5",
+    "android",
+    "ios"
+  ]
+}

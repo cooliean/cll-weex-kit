@@ -1,0 +1,60 @@
+<template>
+    <div class="main" style="width: {{viewWidth}};height:{{viewHeight}};top:{{paddingTop}};left:{{paddingLeft}};">
+        <loading-indicator animating="{{doLoading}}"></loading-indicator>
+    </div>
+</template>
+
+<style>
+    .main {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px
+    }
+</style>
+
+<script>
+    //require('weex-components');
+    var convert = require('../common/utils/convert')
+    module.exports = {
+        data: {
+            viewHeight: 150,
+            viewWidth: 150,
+            paddingTop: 0,
+            paddingLeft: 0,
+            hasNav: true,
+            doLoading: true
+        },
+        computed: {},
+        methods: {},
+        created: function () {
+            var config = this.$getConfig();
+            var env = config.env;
+            if (env.platform == 'iOS') {
+                var scale = env.scale;
+                var deviceWidth = env.deviceWidth / scale;
+                var deviceHeight = env.deviceHeight / scale;
+                var wxDeviceWidth = 750.0;
+                var wxDeviceHeight = wxDeviceWidth * env.deviceHeight / env.deviceWidth;
+
+                var navBarHeight = 0;
+                if (convert.toBool(this.hasNav)) {
+                    navBarHeight = 64.0 * 750.0 / deviceWidth
+                }
+                this.paddingTop = (wxDeviceHeight - navBarHeight) / 2.0 - this.viewHeight / 2;
+                this.viewHeight = 150;
+                this.viewWidth = 150;
+            } else {
+                this.paddingTop = 200;
+            }
+            //this.paddingLeft = 750.0/2.0 - this.viewWidth/2.0
+            //在实例创建之后同步调用。
+            //但是还没有开始 DOM 编译， 还不存在,但是实例存在,即this.a存在,可打印出来 。
+            //console.log("created");
+            this.paddingLeft = 750.0 / 2.0 - this.viewWidth / 2.0
+        },
+        ready: function () {
+        }
+    }
+</script>

@@ -1,0 +1,34 @@
+<template>
+    <div class="hr"></div>
+</template>
+
+<style>
+    .hr{
+        margin-top:110;
+        border-top-width:1;
+        border-top-color:#C1C1C1;
+        background-color: red;
+        height:20;
+    }
+</style>
+
+<script>
+    //require('weex-components');
+    var colors  = require('../common/colors');
+    module.exports = {
+        data: {
+            lineColor:colors.lineHeight,
+            paddingHeight:5,
+            paddingFooter:5
+        },
+        created: function () {
+            //在实例创建之后同步调用。
+            //但是还没有开始 DOM 编译， 还不存在,但是实例存在,即this.a存在,可打印出来 。
+            //console.log("created");
+        },
+        ready: function () {
+            //console.log("ready");
+        },
+        methods: {}
+    }
+</script>

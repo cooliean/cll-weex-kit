@@ -1,0 +1,99 @@
+<template>
+    <div class="wrapper">
+        <embed class="content-{{barPosition}}" style="visibility:{{visibility}}" repeat={{tabItems}} src={{src}} type="weex"></embed>
+        <div class="tabbar-{{barPosition}}" append = "tree">
+            <cll-tab-view-item repeat={{tabItems}} index={{index}} title={{title}} title-font-size="{{titleFontSize}}" type="{{visibility}}" background-color="{{backgroundColor}}" title-color="{{titleColor}}" selected-title-color="{{selectedTitleColor}}" bottom-line-height="{{bottomLineHeight}}" bottom-line-color="{{bottomLineColor}}" ></cll-tab-view-item>
+        </div>
+    </div>
+</template>
+
+<style>
+    .wrapper {
+        width: 750;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .content-bottom {
+        position: absolute;
+        top: 0; left: 0;
+        right: 0;
+        bottom: 0;
+        margin-top: 0;
+        margin-bottom: 88;
+    }
+    .tabbar-bottom {
+        flex-direction: row;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 88;
+    }
+    .content-top {
+        position: absolute;
+        top: 0; left: 0;
+        right: 0;
+        bottom: 0;
+        margin-top: 88;
+        margin-bottom: 0;
+    }
+    .tabbar-top {
+        flex-direction: row;
+        position: fixed;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 88;
+    }
+</style>
+
+<script>
+    require('./cll-tab-view-item.we')
+
+    module.exports = {
+        data: {
+            tabItems: [ ],
+            backgroundColor: 'beige',
+            bottomLineColor:'#000',
+            bottomLineHeight:2,
+            titleColor:'#ccc',
+            titleFontSize:32,
+            selectedTitleColor:'red',
+            selectedIndex: 0,
+            barPosition: 'top',//这个功能后面再来
+        },
+        created: function () {
+            this.selected(this.selectedIndex);
+
+            this.$on('cllTabBarItem.onClick',function(e){
+                var detail= e.detail;
+                this.selectedIndex = detail.index;
+                this.selected(detail.index);
+
+                var params = {
+                    index: detail.index
+                };
+                this.$dispatch('cllTabBar.onClick', params);
+            });
+        },computed:{
+
+        },
+        methods: {
+            selected: function(index) {
+                for(var i = 0; i < this.tabItems.length; i++) {
+                    var tabItem = this.tabItems[i];
+                    if(i == index){
+                        tabItem.visibility = 'visible';
+                    }
+                    else {
+                        tabItem.visibility = 'hidden';
+                    }
+                }
+            },
+        }
+    }
+</script>

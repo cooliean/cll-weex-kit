@@ -1,0 +1,47 @@
+<template>
+    <div if="{{isShow}}" style="flex-direction: column; flex:1;align-items: center; justify-content: center;">
+        <image src="{{warningImage}}"
+               style="width: 150px;height: 150px;"></image>
+        <text style="font-size: 32px">{{title}}</text>
+        <text style="font-size: 30px;margin: 30px;color: #999">{{content}}</text>
+        <div style="border-width: 2px;border-radius: 8px;border-color:darkgray;" onclick="_buttonOnClick">
+            <text style="font-size: 30px;font-style: oblique;margin-top: 12px;margin-bottom: 12px;margin-left: 45px;margin-right: 45px">
+                {{retryTitle}}
+            </text>
+        </div>
+    </div>
+</template>
+<style>
+
+
+</style>
+
+<script>
+    require('weex-components');
+    var app = require('../common/utils/app');
+    module.exports = {
+        data: {
+            isShow:false,
+            title:'内容为空',
+            content:'还没有对应的数据',
+            retryTitle:'重试',
+            warningImage:'',
+        },
+        computed: {},
+        methods: {
+            _buttonOnClick: function (e) {
+                //this.isShow = false;
+                this.$dispatch('cllErrorView.click', {});
+            }
+        },
+        created: function () {
+            //在实例创建之后同步调用。
+            //但是还没有开始 DOM 编译， 还不存在,但是实例存在,即this.a存在,可打印出来 。
+            //console.log("created");
+            this.warningImage = app.setupUrl('./resources/ic_warning_200.png',this);
+        },
+        ready: function () {
+            //console.log("ready");
+        }
+    }
+</script>
